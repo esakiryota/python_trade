@@ -4,13 +4,18 @@ from oandapyV20.endpoints.pricing import PricingStream
 import oandapyV20.endpoints.orders as orders
 import oandapyV20.endpoints.instruments as instruments
 import oandapyV20.endpoints.accounts as accounts
-import oandapy
-import pandas as pd
+# import oandapy
+# import pandas as pd
+# import datetime
+# from datetime import datetime, timedelta
+# import pytz
+# # API接続設定のファイルを読み込む
+# import configparser
+
+import json
 import datetime
-from datetime import datetime, timedelta
-import pytz
-# API接続設定のファイルを読み込む
-import configparser
+import pandas as pd
+from dateutil.relativedelta import relativedelta
 
 
 accountID = "101-009-16203168-001"
