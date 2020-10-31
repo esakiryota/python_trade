@@ -17,7 +17,7 @@ r = pricing.PricingInfo(accountID=accountID, params={'instruments': instruments}
 def start_server():
     context = zmq.Context()
     pub = context.socket(zmq.PUB)
-    pub.bind("tcp://172.20.10.3:5556")
+    pub.bind("tcp://*:5556")
 
     print("Server startup.")
 

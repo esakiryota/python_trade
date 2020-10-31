@@ -13,7 +13,7 @@ r = pricing.PricingInfo(accountID=accountID, params={'instruments': instruments}
 def start_client():
     context = zmq.Context()
     socket = context.socket(zmq.REQ)
-    socket.connect("tcp://172.20.10.3:5556")
+    socket.connect("tcp://*:5556")
 
     while True:
         # print("Enter message:")
