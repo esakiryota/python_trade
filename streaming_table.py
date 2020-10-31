@@ -18,30 +18,28 @@ s = PricingStream(accountID=accountID, params={"instruments":instruments})
 api = API(access_token=access_token, environment="practice")
 MAXREC = 10
 
-cols = ['Datetime', 'bids','asks', 'closeoutBid', 'closeoutAsk', 'instrument']
-df = pd.DataFrame(index= [], columns=cols)
-# df['Datetime'] = pd.to_datetime(df['Datetime'])
-# df = df.set_index('Datetime')
 fig, ax = plt.subplots(1, 1)
+info = []
 
 try:
     n = 0
     for R in api.request(s):
         print(json.dumps(R, indent=2))
         if ("bids" in R.keys()):
-            record = pd.Series(
-            [
+            cols = ['Datetime', 'bids','asks', 'closeoutBid', 'closeoutAsk', 'instrument']
+            df = pd.DataFrame(index= [], columns=cols)
+            info.append([
             R["time"][:19],
             R["bids"][0]["price"],
             R["asks"][0]["price"],
             R["closeoutBid"],
             R["closeoutAsk"],
-            R["instrument"]],
-            index=df.columns)
-            df = df.append(record, ignore_index=True)
-            x = df["Datetime"].values
-            y = df["bids"].values
+            R["instrument"]
+            ])
+            df = pd.DataFrame(info)
+            df.columns = cols
             df['Datetime'] = pd.to_datetime(df['Datetime'])
+            df = df.set_index('Datetime')
             print(json.dumps(R["bids"][0]["price"], indent=2))
             print(df)
         n += 1
