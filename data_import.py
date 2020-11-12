@@ -12,6 +12,7 @@ import matplotlib.pyplot as plt
 import mplfinance as mpf
 import numpy as np
 from itertools import product
+import pytz
 
 
 accountID = "101-009-16203168-001"
@@ -30,8 +31,11 @@ def getCandleDataFromOanda(instrument, api, date_from, date_to, granularity):
 
 all_data = []
 #2020年7月の10分足
-date_from = datetime.datetime(2020, 10, 26)
-date_to = datetime.datetime(2020, 10, 27)
+date_from = datetime.datetime(2020, 11, 3)
+#イギリス時間に合わせる
+date_to = datetime.datetime.now() + datetime.timedelta(hours=-14)
+# date_to = datetime.datetime.now()
+print(date_to)
 ret = getCandleDataFromOanda("EUR_USD", api, date_from, date_to, "M5")
 
 data = []
